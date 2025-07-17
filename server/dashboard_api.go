@@ -97,14 +97,14 @@ func (svr *Service) healthz(w http.ResponseWriter, _ *http.Request) {
 func (svr *Service) apiServerInfo(w http.ResponseWriter, r *http.Request) {
 	res := GeneralResponse{Code: 200}
 	defer func() {
-		log.Infof("Http response [%s]: code [%d]", r.URL.Path, res.Code)
+		log.Infof("http response [%s]: code [%d]", r.URL.Path, res.Code)
 		w.WriteHeader(res.Code)
 		if len(res.Msg) > 0 {
 			_, _ = w.Write([]byte(res.Msg))
 		}
 	}()
 
-	log.Infof("Http request: [%s]", r.URL.Path)
+	log.Infof("http request: [%s]", r.URL.Path)
 	serverStats := mem.StatsCollector.GetServer()
 	svrResp := serverInfoResp{
 		Version:               version.Full(),
@@ -219,13 +219,13 @@ func (svr *Service) apiProxyByType(w http.ResponseWriter, r *http.Request) {
 	proxyType := params["type"]
 
 	defer func() {
-		log.Infof("Http response [%s]: code [%d]", r.URL.Path, res.Code)
+		log.Infof("http response [%s]: code [%d]", r.URL.Path, res.Code)
 		w.WriteHeader(res.Code)
 		if len(res.Msg) > 0 {
 			_, _ = w.Write([]byte(res.Msg))
 		}
 	}()
-	log.Infof("Http request: [%s]", r.URL.Path)
+	log.Infof("http request: [%s]", r.URL.Path)
 
 	proxyInfoResp := GetProxyInfoResp{}
 	proxyInfoResp.Proxies = svr.getProxyStatsByType(proxyType)
@@ -292,13 +292,13 @@ func (svr *Service) apiProxyByTypeAndName(w http.ResponseWriter, r *http.Request
 	name := params["name"]
 
 	defer func() {
-		log.Infof("Http response [%s]: code [%d]", r.URL.Path, res.Code)
+		log.Infof("http response [%s]: code [%d]", r.URL.Path, res.Code)
 		w.WriteHeader(res.Code)
 		if len(res.Msg) > 0 {
 			_, _ = w.Write([]byte(res.Msg))
 		}
 	}()
-	log.Infof("Http request: [%s]", r.URL.Path)
+	log.Infof("http request: [%s]", r.URL.Path)
 
 	var proxyStatsResp GetProxyStatsResp
 	proxyStatsResp, res.Code, res.Msg = svr.getProxyStatsByTypeAndName(proxyType, name)
@@ -360,13 +360,13 @@ func (svr *Service) apiProxyTraffic(w http.ResponseWriter, r *http.Request) {
 	name := params["name"]
 
 	defer func() {
-		log.Infof("Http response [%s]: code [%d]", r.URL.Path, res.Code)
+		log.Infof("http response [%s]: code [%d]", r.URL.Path, res.Code)
 		w.WriteHeader(res.Code)
 		if len(res.Msg) > 0 {
 			_, _ = w.Write([]byte(res.Msg))
 		}
 	}()
-	log.Infof("Http request: [%s]", r.URL.Path)
+	log.Infof("http request: [%s]", r.URL.Path)
 
 	trafficResp := GetProxyTrafficResp{}
 	trafficResp.Name = name
@@ -388,9 +388,9 @@ func (svr *Service) apiProxyTraffic(w http.ResponseWriter, r *http.Request) {
 func (svr *Service) deleteProxies(w http.ResponseWriter, r *http.Request) {
 	res := GeneralResponse{Code: 200}
 
-	log.Infof("Http request: [%s]", r.URL.Path)
+	log.Infof("http request: [%s]", r.URL.Path)
 	defer func() {
-		log.Infof("Http response [%s]: code [%d]", r.URL.Path, res.Code)
+		log.Infof("http response [%s]: code [%d]", r.URL.Path, res.Code)
 		w.WriteHeader(res.Code)
 		if len(res.Msg) > 0 {
 			_, _ = w.Write([]byte(res.Msg))
